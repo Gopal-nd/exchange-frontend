@@ -68,7 +68,7 @@ export default function Navbar() {
           </div>
 
 
-          <div className=" absolute  top-0 left-1/2 -translate-x-1/2 justify-self-center inline-flex">
+          <div className="hidden  lg:absolute  top-0 left-1/2 -translate-x-1/2 justify-self-center inline-flex">
             <div className="flex w-[340px] flex-1 cursor-pointer flex-row items-center justify-between overflow-hidden rounded-xl bg-base-background-l2 px-1 ring-0 focus-within:ring-2 focus-within:ring-accent-blue">
 
               <div className="flex flex-1 flex-row items-center">

@@ -26,7 +26,7 @@ export default function Navbar() {
             </Link>
 
             {/* DESKTOP NAV LINKS */}
-            <div className="flex flex-row items-center pl-4 justify-center gap-5 mx-4 sm:gap-8">
+            <div className="hidden md:flex flex-row items-center pl-4 justify-center gap-5 mx-4 sm:gap-8">
               <Link
                 href="/trade/SOL_USD"
                 className={clsx(
@@ -68,8 +68,8 @@ export default function Navbar() {
           </div>
 
 
-          <div className="hidden  lg:absolute  top-0 left-1/2 -translate-x-1/2 justify-self-center inline-flex">
-            <div className="flex w-[340px] flex-1 cursor-pointer flex-row items-center justify-between overflow-hidden rounded-xl bg-base-background-l2 px-1 ring-0 focus-within:ring-2 focus-within:ring-accent-blue">
+          <div className="hidden  lg:absolute top-0 left-1/2 -translate-x-1/2 justify-self-center inline-flex">
+            <div className="hidden xl:flex w-[340px] flex-1 cursor-pointer flex-row items-center justify-between overflow-hidden rounded-xl bg-base-background-l2 px-1 ring-0 focus-within:ring-2 focus-within:ring-accent-blue">
 
               <div className="flex flex-1 flex-row items-center">
                 <div className="mx-2">

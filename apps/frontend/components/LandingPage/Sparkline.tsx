@@ -18,6 +18,7 @@ export default function Sparkline({
     })
     .join(" ");
 
+
   return (
     <svg width="120" height="30" viewBox="0 0 120 30">
       <polyline

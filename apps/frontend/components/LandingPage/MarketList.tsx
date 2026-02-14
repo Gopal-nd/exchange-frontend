@@ -114,7 +114,7 @@ const columns: ColumnDef<Market>[] = [
     getSortedRowModel: getSortedRowModel(),
   });
   return (
-    <div className='p-4 bg-base-background-l1 space-y-2 custom-scroll'>
+    <div className='p-4 bg-base-background-l1 space-y-2 overflow-y-auto'>
         <div className='text-sm flex items-center gap-4 text-med-emphasis'>
             <button className={`${state=='Spot'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('Spot')}>Spot</button>
             <button className={`${state=='Fetures'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('Fetures')}>Fetures</button>

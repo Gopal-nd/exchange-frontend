@@ -26,6 +26,51 @@ export type Market = {
   price_change_percentage_24h_in_currency: number;
 };
 
+export interface TradeWSMessage {
+  e: "trade";          // event type
+  s: string;           // symbol (e.g. SOL_USDC)
+
+  p: string;           // price
+  q: string;           // quantity
+
+  t: number;           // trade ID
+  T: number;           // trade time (ms or µs)
+  E: number;           // event time
+
+  a: string;           // ask order ID
+  b: string;           // bid order ID
+
+  m: boolean;          // buyer is maker
+}
+export interface BookTickerWSMessage {
+  e: "bookTicker";
+  s: string;
+
+  b: string; // best bid price
+  B: string; // best bid quantity
+
+  a: string; // best ask price
+  A: string; // best ask quantity
+
+  u: number; // update ID
+  T: number; // transaction time
+  E: number; // event time
+}
+export type DepthLevel = [string, string];
+
+export interface DepthWSMessage {
+  e: "depth";
+  s: string;
+
+  E: number;
+  T: number;
+
+  U: number; // first update ID       //differnce is the sum of asks and bids
+  u: number; // last update ID
+
+  b: DepthLevel[]; // bids
+  a: DepthLevel[]; // asks
+}
 
 export type FooterLink = {
   label: string;
@@ -113,3 +158,12 @@ export const socialLinks = [
         size: 20,
     },
 ];
+
+export type CandlestickData = {
+    start: string;
+    open: number;
+    high: number;
+    low: number; 
+    close: number;
+    newCandleInitiated: any
+};

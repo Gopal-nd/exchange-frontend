@@ -146,17 +146,6 @@
   }
 }
 
-.custom-scroll {
-  overflow-y: auto;
-}
-
-.custom-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scroll::-webkit-scrollbar-thumb {
-  background: #22c55e; /* green-500 */
-}
 
 
 ::-webkit-scrollbar {

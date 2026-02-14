@@ -109,7 +109,7 @@ export default function HomeCarousel() {
     <div className="relative h-48 overflow-hidden rounded-xl sm:aspect-[1280/373] sm:h-auto">
       
       <div
-        className="flex h-full transition-transform duration-300"
+        className="flex h-full  transition-all duration-300"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {slides.map((slide, i) => (

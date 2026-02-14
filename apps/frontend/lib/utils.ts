@@ -71,5 +71,60 @@ export const candleBarColors = {
         x: boolean; // Is this kline closed?
       };
     }
+const TIMEFRAME_MS = 5 * 60_000; // 5m (change to 1m / 15m easily)
+interface CandlestickData {
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  start: number; // candle start time (ms)
+}
 
-    
+let currentCandle: CandlestickData | null = null;
+
+export const updateCandle = (data: {
+  p: string;
+  T: number;
+}) => {
+  const price = Number(data.p);
+
+  const tradeTimeMs = Math.floor(data.T / 1000);
+
+  const candleStart =
+    Math.floor(tradeTimeMs / TIMEFRAME_MS) * TIMEFRAME_MS;
+
+  // First candle
+  if (!currentCandle) {
+    currentCandle = {
+      open: price,
+      high: price,
+      low: price,
+      close: price,
+      start: candleStart,
+    };
+    return currentCandle;
+  }
+
+  // Same candle → update
+  if (candleStart === currentCandle.start) {
+    currentCandle.high = Math.max(currentCandle.high, price);
+    currentCandle.low = Math.min(currentCandle.low, price);
+    currentCandle.close = price;
+    return currentCandle;
+  }
+
+  // New candle → rollover
+  if (candleStart > currentCandle.start) {
+    currentCandle = {
+      open: price,
+      high: price,
+      low: price,
+      close: price,
+      start: candleStart,
+    };
+    return currentCandle;
+  }
+
+  // Old trade → ignore
+  return null;
+};

@@ -70,7 +70,7 @@ export class SignalingManagr {
         }
          if (type === "trade") {
           // console.log(message?.data?.p)
-          callback(message?.data?.p);
+          callback(message?.data);
         }
 
         if (type === "depth") {
@@ -97,6 +97,7 @@ export class SignalingManagr {
   registerCallback(type: string, callback: Function, id: string) {
     this.callbacks[type] ||= [];
     this.addedTypes.push(type)
+    //@ts ignore
     this.callbacks[type].push({ id, callback });
     console.log(this.callbacks)
   }

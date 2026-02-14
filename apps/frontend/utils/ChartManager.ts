@@ -37,19 +37,19 @@ export class ChartManager {
     }
 
     public update(updatedData: CandlestickData) {
-        if (!this.lastUpdateTime) {
-            this.lastUpdateTime = new Date().getTime();
-        }
+        // if (!this.lastUpdateTime) {
+        //     this.lastUpdateTime = new Date().getTime();
+        // }
         this.candleSeries.update({
-            time: (this.lastUpdateTime / 1000) as UTCTimestamp,
+            time: (new Date(updatedData.start).getTime() / 1000) as UTCTimestamp,
             close: Number(updatedData.close),
             open: Number(updatedData.open),
             high: Number(updatedData.high),
             low: Number(updatedData.low)
         })
-        if (updatedData.newCandleInitiated) {
-            this.lastUpdateTime = new Date(updatedData.start).getTime()
-        }
+        // if (updatedData.newCandleInitiated) {
+        //     this.lastUpdateTime = new Date(updatedData.start).getTime()
+        // }
     }
     public destroy() {
         this.chart.remove()

@@ -26,7 +26,7 @@ export async function fetchHistory(): Promise<CandlestickData[]> {
 }
 
 export function connectWebSocket(candleSeries?: ISeriesApi<"Candlestick">) {
-    const ws = new WebSocket(WS_URL);
+    const ws = new WebSocket(BASE_URL);
 
     ws.onopen = () => {console.log('WebSocket connected')
        
@@ -45,9 +45,9 @@ export function connectWebSocket(candleSeries?: ISeriesApi<"Candlestick">) {
     // )
     
 
-    // ws.send(JSON.stringify({method:"SUBSCRIBE",params:["trade.SOL_USDC"],id:1}))
+    ws.send(JSON.stringify({method:"SUBSCRIBE",params:["trade.SOL_USDC"],id:1}))
 
-    ws.send(JSON.stringify({"method":"SUBSCRIBE","params":["depth.200ms.SOL_USDC"],"id":4}))
+    // ws.send(JSON.stringify({"method":"SUBSCRIBE","params":["depth.200ms.SOL_USDC"],"id":4}))
 
     }
 

@@ -1,5 +1,5 @@
 'use client'
-import { candleBarColors, chartConfig } from '@/lib/utils';
+import { candleBarColors, chartConfig, updateCandle } from '@/lib/utils';
 import { ChartManager } from '@/utils/ChartManager';
 import { getKLines } from '@/utils/http';
 import { SignalingManagr } from '@/utils/SignalingManager';
@@ -30,10 +30,17 @@ const Chart = ({ token, isPerp }: { token: string, isPerp: boolean }) => {
 
 
     }
+  const onTrade = (trade: any) => {
+  const candle = updateCandle(trade);
+  if (!candle) return;
+
+  chart.update(candle);
+};
+
     main().catch(console.error)
     ws.sendMessage({ method: "SUBSCRIBE", params: [`trade.${token}C`] })
     ws.registerCallback('trade', (data: any) => {
-      console.log(data)
+      onTrade(data)
     }, `trade-${token}`)
 
     return () => {

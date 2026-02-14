@@ -160,10 +160,9 @@ export const socialLinks = [
 ];
 
 export type CandlestickData = {
-    start: string;
+    start: number;
     open: number;
     high: number;
     low: number; 
     close: number;
-    newCandleInitiated: any
 };

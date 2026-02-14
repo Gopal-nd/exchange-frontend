@@ -11,7 +11,7 @@ const Overview = ({ token, isPerp }: { token: string, isPerp: boolean }) => {
     useEffect(() => {
         const ws = SignalingManagr.getInstance()
         ws.registerCallback('trade', (data: any) => {
-            setPrice(data)
+            setPrice(data?.p)
         }, `trade-${token}`)
 
         ws.sendMessage({ method: "SUBSCRIBE", params: [`trade.${token}C`] })

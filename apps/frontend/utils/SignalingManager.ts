@@ -18,14 +18,14 @@ type CallbackEntry<T = any> = {
   callback: (data: T) => void;
 };
 
-export class SignalingManagr {
+export class SignalingManager {
   private ws: WebSocket;
   private bufferedMessages: any[] = [];
   private id = 1;
   private initialized = false;
   private addedTypes: string[] = []
 
-  private static instance: SignalingManagr | null = null;
+  private static instance: SignalingManager | null = null;
 
   private callbacks: Record<string, CallbackEntry[]> = {};
 
@@ -34,11 +34,11 @@ export class SignalingManagr {
     this.init();
   }
 
-  public static getInstance(): SignalingManagr {
-    if (!SignalingManagr.instance) {
-      SignalingManagr.instance = new SignalingManagr();
+  public static getInstance(): SignalingManager {
+    if (!SignalingManager.instance) {
+      SignalingManager.instance = new SignalingManager();
     }
-    return SignalingManagr.instance;
+    return SignalingManager.instance;
   }
 
   private init() {
@@ -54,7 +54,7 @@ export class SignalingManagr {
       const message = JSON.parse(event.data);
       const type = message?.data?.e;
       if (!type || !this.callbacks[type]) return;
-      console.log(message)
+      // console.log(message)
 
       this.callbacks[type].forEach(({ callback }) => {
         if (type === "ticker") {

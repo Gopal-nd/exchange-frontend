@@ -1,4 +1,11 @@
 
+export type Depth = {
+asks:[string,string][];
+bids:[string,string][];
+lastUpdateId:string;
+timestamp:number;
+}
+
 export type Market = {
   id: string;
   symbol: string;

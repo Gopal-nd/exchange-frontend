@@ -1,25 +1,13 @@
 'use client'
-import { Market } from '@/types'
+import { Market, TradeWSMessage } from '@/types'
 import { getCurrentTokenData } from '@/utils/http'
-import { SignalingManagr } from '@/utils/SignalingManager'
+import { SignalingManager } from '@/utils/SignalingManager'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
-const Overview = ({ token, isPerp }: { token: string, isPerp: boolean }) => {
-    const [price, setPrice] = useState()
-    useEffect(() => {
-        const ws = SignalingManagr.getInstance()
-        ws.registerCallback('trade', (data: any) => {
-            setPrice(data?.p)
-        }, `trade-${token}`)
+const Overview = ({ token, isPerp,trade }: { token: string, isPerp: boolean,trade?:TradeWSMessage }) => {
 
-        ws.sendMessage({ method: "SUBSCRIBE", params: [`trade.${token}C`] })
-        return () => {
-            ws.sendMessage({ method: "UNSUBSCRIBE", params: [`trade.${token}C`] })
-            ws.deRegisterCallback('trade', `trade.${token}C`)
-        }
-    }, [])
     const { data, isLoading, error, isError } = useQuery({ queryKey: ['todos'], queryFn: () => getCurrentTokenData(token.split('_')[0]) })
     // console.log(data)
     if (isLoading) {
@@ -55,7 +43,7 @@ const Overview = ({ token, isPerp }: { token: string, isPerp: boolean }) => {
                                     aria-label="Current price"
                                 >
                                     <p className={`text-base font-medium tabular-nums ${data[0].current_price >= 0 ? 'text-green-500' : 'text-red-500'} `}>
-                                        {price ?? data[0].current_price}
+                                        {trade?.p ?? data[0].current_price}
                                     </p>
                                 </button>
                             </div>

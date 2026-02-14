@@ -2,7 +2,7 @@
 import { candleBarColors, chartConfig, updateCandle } from '@/lib/utils';
 import { ChartManager } from '@/utils/ChartManager';
 import { getKLines } from '@/utils/http';
-import { SignalingManagr } from '@/utils/SignalingManager';
+import { SignalingManager } from '@/utils/SignalingManager';
 import { connectWebSocket, fetchHistory } from '@/utils/test';
 import { createChart, CandlestickSeries, ColorType } from 'lightweight-charts';
 import type { CandlestickData, ISeriesApi, UTCTimestamp } from 'lightweight-charts';
@@ -20,7 +20,7 @@ const Chart = ({ token, isPerp }: { token: string, isPerp: boolean }) => {
 
     const chart = new ChartManager(chartRef.current)
 
-    const ws = SignalingManagr.getInstance()
+    const ws = SignalingManager.getInstance()
     async function main() {
       // ws.registerCallback('',)
 

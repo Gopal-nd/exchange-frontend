@@ -42,7 +42,7 @@ const Overview = ({ token, isPerp,trade }: { token: string, isPerp: boolean,trad
                                     className="cursor-help"
                                     aria-label="Current price"
                                 >
-                                    <p className={`text-base font-medium tabular-nums ${data[0].current_price >= 0 ? 'text-green-500' : 'text-red-500'} `}>
+                                    <p className={`text-base font-medium tabular-nums ${trade?.m  ? 'text-red-500' : 'text-green-500'} `}>
                                         {trade?.p ?? data[0].current_price}
                                     </p>
                                 </button>

@@ -6,9 +6,11 @@ import Overview from "./Trade/Overview"
 import { SignalingManager } from "@/utils/SignalingManager"
 import { TradeWSMessage } from "@/types"
 import Depth from "./Depth/Depth"
+import TradesList from "./Trade/TradeList"
 
 const LeftSidePanle = ({id,isPerp}:{id:string,isPerp:boolean}) => {
        const [trade, setTrade] = useState<TradeWSMessage>()
+       const [state,setState] = useState<'book'|'trade'>('book')
     useEffect(() => {
         const ws = SignalingManager.getInstance()
         ws.registerCallback('trade', (data: TradeWSMessage) => {
@@ -54,22 +56,26 @@ const LeftSidePanle = ({id,isPerp}:{id:string,isPerp:boolean}) => {
 
                             {/* Tabs */}
                             <div className="p-3 flex gap-2">
-                                <div className="flex h-8 cursor-pointer items-center justify-center whitespace-nowrap rounded-lg bg-base-background-l2 px-3 text-[13px] font-semibold text-high-emphasis hover:opacity-90">
+                                <div onClick={()=>setState('book')} className={`flex h-8 cursor-pointer items-center justify-center whitespace-nowrap rounded-lg ${ state == 'book' && 'bg-base-background-l2'} px-3 text-[13px] font-semibold text-high-emphasis hover:opacity-90`}>
                                     Book
                                 </div>
-                                <div className="flex h-8 cursor-pointer items-center justify-center whitespace-nowrap rounded-lg  px-3 text-[13px] font-semibold text-high-emphasis hover:opacity-90">
+                                <div onClick={()=>setState('trade')} className={`flex h-8 cursor-pointer items-center justify-center whitespace-nowrap rounded-lg ${ state == 'trade' && 'bg-base-background-l2'} px-3 text-[13px] font-semibold text-high-emphasis hover:opacity-90`}>
                                     Trades
                                 </div>
                             </div>
 
-                            {/* Headers */}
+                         { state == 'book' ? (   <>
                             <div className="flex px-3 py-2 text-xs">
                                 <div className="w-2/3">Price (USD)</div>
                                 <div className="w-1/3 text-right">Total (SOL)</div>
                             </div>
 
-                            {/* DEPTH */}
-                            <Depth market={`${id}C`} />
+                            <Depth market={`${id}C`} price={trade?.p} />
+                            </>)
+                            :(
+                               trade && <TradesList trade={trade} />
+                            )}
+
 
 
 

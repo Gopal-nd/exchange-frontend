@@ -33,6 +33,20 @@ export type Market = {
   price_change_percentage_24h_in_currency: number;
 };
 
+export type Ticker24h = {
+    firstPrice: string
+    high: string
+    lastPrice: string
+    low: string
+    priceChange: string
+    priceChangePercent: string
+    quoteVolume: string
+    symbol: string
+    trades: string
+    volume: string
+}
+
+
 export interface TradeWSMessage {
   e: "trade";          // event type
   s: string;           // symbol (e.g. SOL_USDC)

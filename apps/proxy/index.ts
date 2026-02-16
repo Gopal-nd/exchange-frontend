@@ -26,8 +26,19 @@ app.get("/klines", async (req, res) => {
   }
 });
 
+app.get("/tickers", async (req, res) => {
+  try {
 
+    const response = await axios.get(`${BACKPACK_BASE_URL}/api/v1/tickers`);
 
+    return res.status(200).json(response.data)
+  } catch (err) {
+    console.error("Proxy error:", err);
+    res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
 
 app.get("/depth", async (req, res) => {
   try {

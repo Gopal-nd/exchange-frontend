@@ -1,3 +1,4 @@
+import { staticTokenData } from "@/types/token";
 import { clsx, type ClassValue } from "clsx"
 import { ColorType } from "lightweight-charts";
 import { twMerge } from "tailwind-merge"
@@ -128,3 +129,9 @@ export const updateCandle = (data: {
   // Old trade → ignore
   return null;
 };
+
+
+export const getTokenImage =(token:string):string =>{
+const img = staticTokenData.filter((f)=>f.symbol==token.split('_')[0].toLocaleLowerCase())
+return img[0].image
+}

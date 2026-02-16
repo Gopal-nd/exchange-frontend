@@ -7,6 +7,8 @@
     .slice(0, 15);
     const AsksWithTotal: [string, string, number][] = relevantAsks.map(([price, quantity]) => [price, quantity, currentTotal += Number(quantity)]);
     const maxTotal = relevantAsks.reduce((acc, [_, quantity]) => acc + Number(quantity), 0);
+    const maxTotalPrice = relevantAsks.reduce((acc, [_, quantity]) => acc + Number(quantity), 0);
+
     AsksWithTotal.reverse()
     return <div className="space-y-0.5">
         {AsksWithTotal?.map(([price, quantity, total]) => <Bid maxTotal={maxTotal} total={total} key={price} price={price} quantity={quantity} />)}

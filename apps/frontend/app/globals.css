@@ -8,6 +8,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-med-emphasis :var(--med-emphasis);
+  --color-red-background-solid:var(--red-background-solid);
+  --color-green-background-solid:var(--green-background-solid);
+  --color-red-text:var(--red-text);
+  --color-green-text:var(--green-text);
   --color-base-icon:var(--base-icon);
   --color-high-emphasis:var(--high-emphasis);
   --color-base-background-l0: var(--base-background-l0); 
@@ -59,8 +63,12 @@
 
 :root {
   --radius: 0.625rem;
+  --red-background-solid:#351a1f;
+  --green-background-solid:#122322;
   --base-background-l0: #0e0f14;
   --high-emphasis:#f4f4f6;
+  --red-text:#fd4b4e;
+  --green-text:#00c278;
   --med-emphasis:#969faf; 
   --base-background-l1: #14151b;
   --base-background-l1v2: #191a20;

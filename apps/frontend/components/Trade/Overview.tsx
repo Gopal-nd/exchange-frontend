@@ -6,11 +6,12 @@ import { SignalingManager } from '@/utils/SignalingManager'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import DataNotFound from '../DataNotFound'
 
 const Overview = ({ token, isPerp,trade }: { token: string, isPerp: boolean,trade?:TradeWSMessage }) => {
 
-    const { data, isLoading, error, isError } = useQuery({ queryKey: [`token`,token], queryFn: () => getTicker24h(token+'C'),staleTime:10 })
-    console.log(data)
+    const { data, isLoading, error, isError } = useQuery({ queryKey: [`token`,token], queryFn: () => getTicker24h(token),staleTime:10 })
+    // console.log(data)
     const staticToken = staticTokenData.filter((f)=>f.symbol == token.split('_')[0].toLocaleLowerCase())
     if (isLoading) {
         <div>Loading..</div>
@@ -18,9 +19,10 @@ const Overview = ({ token, isPerp,trade }: { token: string, isPerp: boolean,trad
     if (isError) {
         <div className="">{JSON.stringify(error)}</div>
     }
+    if(!data)return  <div></div>
 
-    if (!data) {
-        return
+    if (data?.length==0) {
+       return  <DataNotFound token={token}/>
     }
 
 

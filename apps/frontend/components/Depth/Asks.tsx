@@ -40,7 +40,7 @@ function Bid({ price, quantity, total, maxTotal }: { price: string, quantity: st
         </span>
 
         <span className="text-right">
-          {Number(quantity).toFixed(2)}
+          {Number(quantity)}
         </span>
 
         <span className="text-right text-gray-400">

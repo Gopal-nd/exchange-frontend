@@ -10,7 +10,6 @@ const HomePage = async () => {
 
 
   const data = await getCurrentData()
-  console.log(data)
   return (
     <div className="bg-base-background-l0 text-high-emphasis flex flex-1 flex-col justify-between overflow-y-auto">
       <div className="flex flex-col flex-1 gap-8 ">

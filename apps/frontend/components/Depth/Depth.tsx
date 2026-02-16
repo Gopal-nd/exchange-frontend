@@ -44,7 +44,7 @@ const Depth = ({ market, ticker, price }: { market: string, ticker?: string, pri
         SignalingManager.getInstance().sendMessage({ "method": "SUBSCRIBE", "params": [`depth.${market}`] });
 
         getDepth(market).then(d => {
-            console.log(d)
+            // console.log(d)
             setBids(d.bids.reverse());
             setAsks(d.asks);
         });

@@ -97,7 +97,7 @@ export class SignalingManager {
   registerCallback(type: string, callback: Function, id: string) {
     this.callbacks[type] ||= [];
     this.addedTypes.push(type)
-    //@ts ignore
+    // @ts-ignore
     this.callbacks[type].push({ id, callback });
     console.log(this.callbacks)
   }

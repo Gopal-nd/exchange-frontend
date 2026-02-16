@@ -1,5 +1,6 @@
 import { Market } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 
 
 export default function MarketCard({
@@ -20,7 +21,8 @@ export default function MarketCard({
 
       <div className="">
         {items.map((item) => (
-          <div
+          <Link
+            href={`/trade/${item.symbol.toUpperCase()}_USD_PERP`}
             key={item.id}
             className="flex items-center justify-between text-sm hover:bg-base-background-l2 px-4 py-2"
           >
@@ -41,7 +43,7 @@ export default function MarketCard({
               {item.price_change_percentage_24h > 0 ? "+" : ""}
               {item.price_change_percentage_24h.toFixed(2)}%
             </span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

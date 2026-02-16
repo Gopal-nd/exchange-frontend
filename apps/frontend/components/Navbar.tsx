@@ -47,7 +47,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/lend/USD"
+                href="#"
                 className={clsx(
                   "focus:none flex h-8 flex-col items-center justify-center rounded-lg bg-transparent p-0 text-sm font-semibold hover:opacity-90",
                   pathname.startsWith('/lend') ? "text-high-emphasis" : "text-med-emphasis"

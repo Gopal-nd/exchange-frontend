@@ -17,10 +17,10 @@ const LeftSidePanle = ({id,isPerp}:{id:string,isPerp:boolean}) => {
             setTrade(data)
         }, `trade-${id}`)
 
-        ws.sendMessage({ method: "SUBSCRIBE", params: [`trade.${id}C`] })
+        ws.sendMessage({ method: "SUBSCRIBE", params: [`trade.${id}`] })
         return () => {
-            ws.sendMessage({ method: "UNSUBSCRIBE", params: [`trade.${id}C`] })
-            ws.deRegisterCallback('trade', `trade.${id}C`)
+            ws.sendMessage({ method: "UNSUBSCRIBE", params: [`trade.${id}`] })
+            ws.deRegisterCallback('trade', `trade.${id}`)
         }
     }, [])
   return (
@@ -66,11 +66,12 @@ const LeftSidePanle = ({id,isPerp}:{id:string,isPerp:boolean}) => {
 
                          { state == 'book' ? (   <>
                             <div className="flex px-3 py-2 text-xs">
-                                <div className="w-2/3">Price (USD)</div>
-                                <div className="w-1/3 text-right">Total (SOL)</div>
+                                <div className="w-1/3">Price (USD)</div>
+                                 <div className="w-1/3 text-center text-med-emphasis">Total (QTY)</div>
+                                <div className="w-1/3 text-right text-med-emphasis">Total ({trade?.s.split('_')[0].toUpperCase()})</div>
                             </div>
 
-                            <Depth market={`${id}C`} price={trade?.p} />
+                            <Depth market={`${id}`} price={trade?.p} />
                             </>)
                             :(
                                trade && <TradesList trade={trade} />

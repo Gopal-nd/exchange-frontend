@@ -11,8 +11,13 @@ import LeftSidePanle from '@/components/LeftSidePanle';
 import BuySellBar from '@/components/BuySellBar';
 
 const Trade = async ({ params }: { params: Promise<{ id: string }> }) => {
-    const { id } = await params
+    let { id } = await params
     const isPerp = id?.includes('PERP')
+    if(isPerp){
+        id = id.split('_')[0] +'_'+ id.split('_')[1]+'C_'+id.split('_')[2]
+    }else{
+         id = id.split('_')[0] +'_'+ id.split('_')[1]+'C'
+    }
 
     return (
         <div className="flex flex-1 flex-col bg-base-background-l0 text-high-emphasis overflow-auto">

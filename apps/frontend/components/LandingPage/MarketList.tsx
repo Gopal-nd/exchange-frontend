@@ -11,18 +11,18 @@ import { Market } from '@/types'
 import { ColumnDef } from "@tanstack/react-table";
 import Sparkline from "./Sparkline";
 import { generateMockSparkline } from "@/lib/utils";
-
+import {useRouter} from 'next/navigation'
 const MarketList = ({data}:{data:Market[]}) => {
 
-    const [state,setState] = useState<string>('Spot')
-
+    const [state,setState] = useState<string>('spot')
+const router = useRouter()
 const columns: ColumnDef<Market>[] = [
   {
     accessorKey: "name",
     header: "Name",
     cell:({row})=>{
         const token = row.original
-         return ( state == 'Spot'?(
+         return ( state == 'spot'?(
              <div className="flex items-center gap-3">
           <img src={token.image} className="w-8 h-8 rounded-full" />
           <div>
@@ -116,9 +116,9 @@ const columns: ColumnDef<Market>[] = [
   return (
     <div className='p-4 bg-base-background-l1 space-y-2 overflow-y-auto'>
         <div className='text-sm flex items-center gap-4 text-med-emphasis'>
-            <button className={`${state=='Spot'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('Spot')}>Spot</button>
-            <button className={`${state=='Fetures'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('Fetures')}>Fetures</button>
-            <button className={`${state=='Lend'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('Lend')}>Lend</button>
+            <button className={`${state=='spot'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('spot')}>Spot</button>
+            <button className={`${state=='fetures'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('fetures')}>Fetures</button>
+            <button className={`${state=='lend'?'bg-base-background-l2 p-2 rounded-lg text-high-emphasis':''}`} onClick={()=>setState('lend')}>Lend</button>
         </div>
         <div>
                 <table className="w-full text-sm ">
@@ -154,7 +154,7 @@ const columns: ColumnDef<Market>[] = [
             className="border-b  border-white/5 hover:bg-base-background-l2"
           >
             {row.getVisibleCells().map(cell => (
-              <td key={cell.id} className="px-4 py-3">
+              <td key={cell.id} className="px-4 py-3" onClick={()=>router.push(state == 'spot'?`/trade/${cell.row.original.symbol.split('_')[0].toUpperCase()}_USD`:`/trade/${cell.row.original.symbol.split('_')[0].toUpperCase()}_USD_PERP`)}>
                 {flexRender(
                   cell.column.columnDef.cell,
                   cell.getContext()

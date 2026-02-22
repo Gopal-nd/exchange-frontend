@@ -14,10 +14,10 @@ export type Kline = {
 };
 
 
-export async function getKLines(symbol = 'SOL_USDC', interval = '5m', startTime = 1770892200): Promise<CandlestickData[]> {
+export async function getKLines(symbol = 'SOL_USDC', interval = '5m', startTime = 1771443000): Promise<CandlestickData[]> {
 
   try {
-    const res = await axios.get(`${process.env.PROXY}/klines?symbol=${symbol}&interval=${interval}&startTime=${startTime}`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_PROXY}/klines?symbol=${symbol}&interval=${interval}&startTime=${startTime}`);
     return res.data
       
 
@@ -38,7 +38,7 @@ export async function getCurrentData(): Promise<Market[]> {
 export async function getDepth(token: string): Promise<Depth> {
   try {
 
-    const res = await axios.get<Depth>(`${process.env.PROXY}/depth?symbol=${token}`)
+    const res = await axios.get<Depth>(`${process.env.NEXT_PUBLIC_PROXY}/depth?symbol=${token}`)
     return res.data
   } catch (error) {
     console.log("error", error)
@@ -61,7 +61,7 @@ export async function getCurrentTokenData(token: string): Promise<Market[]> {
 }
 export async function getTicker24h(token: string): Promise<Ticker24h[]> {
   try {
-    const res = await axios.get<Ticker24h[]>(`${process.env.PROXY}/tickers`)
+    const res = await axios.get<Ticker24h[]>(`${process.env.NEXT_PUBLIC_PROXY}/tickers`)
     const data = res.data.filter((t) => (t['symbol'] === token))
     return data
   } catch (error) {
